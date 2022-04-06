@@ -6,15 +6,18 @@ const CountDownTimer = ({daysHoursMinSecs}) => {
     const {days = 0, hours = 0, minutes = 0, seconds = 60} = daysHoursMinSecs;
     const [[dys,hrs,mins,secs], setTime] = useState([days,hours,minutes,seconds]);
 
+    let storage = localStorage.setItem("time", JSON.stringify([dys,hrs,mins,secs]));
+    let retrieveData = JSON.parse(localStorage.getItem("time") as string);
+
     const tick = ()=>{
-        if (dys === 0 && hrs === 0 && mins === 0 && secs === 0) 
+        if (retrieveData[0] === 0 && retrieveData[1] === 0 && retrieveData[2] === 0 && retrieveData[3] === 0) 
             reset()
-        else if(hrs === 0 && mins ===0 && secs === 0){
+        else if(retrieveData[1] === 0 && retrieveData[2] === 0 && retrieveData[3] === 0){
             setTime([dys-1, 23, 59, 59])
         }
-        else if (mins === 0 && secs === 0) {
+        else if (retrieveData[2] === 0 && retrieveData[3] === 0) {
             setTime([dys, hrs - 1, 59, 59]);
-        } else if (secs === 0) {
+        } else if (retrieveData[3] === 0) {
             setTime([dys, hrs, mins - 1, 59]);
         } else {
             setTime([dys, hrs, mins, secs - 1]);
