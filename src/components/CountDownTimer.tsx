@@ -22,7 +22,9 @@ const CountDownTimer = ({daysHoursMinSecs}) => {
     }
 
     const reset = ()=> setTime([parseInt(days),parseInt(hours), parseInt(minutes), parseInt(seconds)]);
-
+    const finish = () => {
+        
+    }
     useEffect(()=>{
         const timerId = setInterval(()=> tick(), 1000);
         return () => clearInterval(timerId)
